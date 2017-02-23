@@ -17,8 +17,8 @@ include 'pdo.php';
 
 
 			$data = 'SELECT s.`id`, s.`title`, s.duration, a.first_name, a.last_name FROM song s
-					JOIN song_artist sa ON s.id = sa.song_id
-					JOIN artist a ON sa.artist_id = a.id';
+					LEFT JOIN song_artist sa ON s.id = sa.song_id
+					LEFT JOIN artist a ON sa.artist_id = a.id';
 
 			$read_data = $pdo->query($data);
 

@@ -18,7 +18,21 @@
  		<div id="form-add"> 
  			<!-- <form action="php/action.php" method="post"> -->
  				<input type="text" placeholder="title" id="title" name="title"></input>
- 				<input type="text" placeholder="duration(Format MM:ss)" id="duration" name="duration"></input>
+ 				<select id="minute">
+ 					<?php for ($i=1; $i < 10 ; $i++) { 
+ 						echo '<option value="'.$i.'">'.$i.'</option>';
+ 					} ?>
+ 				</select>
+ 				<select id="seconde">
+ 					<?php for ($i=1; $i < 10; $i++) { 
+ 						echo '<option value="0'.$i.'">0'.$i.'</option>';
+ 					} ?>
+ 					<?php for ($i=10; $i <= 60 ; $i++) { 
+ 						echo '<option value="'.$i.'">'.$i.'</option>';
+ 					} ?>
+ 				</select>
+ 				<!-- <input type="text" placeholder="minute(format MM)" id="minute" name="minute"></input>
+ 				<input type="text" placeholder="secondes(format SS)" id="secondes" name="secondes"></input> -->
  				<input type="text" placeholder="artist" id="artist" name="artist"></input>
  				<!-- <input type="submit" value="Envoyez vos données"></input> -->
  				<img src="img/mini-plus.png" id="send-datas">

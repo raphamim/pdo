@@ -26,7 +26,8 @@ function sendDatas() {
 		url: "ajax/send.php",
 		data: {
 			title: $('#title').val(),
-			duration: $('#duration').val(),
+			minute: $('#minute').val(),
+			seconde: $('#seconde').val(),
 			artist: $('#artist').val(),
 			function: 'sendDatas'
 		},
