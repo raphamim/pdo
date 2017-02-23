@@ -20,7 +20,7 @@ Class Ajax {
 				$title = $_POST['title'];
 				$duration = '00:0'.$_POST['minute'].':'.$_POST['seconde'];
 				$artist = $_POST['artist'];
-
+				//ENVOI DE LA MUSIQUE
 				if ( !empty($_POST['title']) ) {
 					
 
@@ -30,7 +30,17 @@ Class Ajax {
 						'title' => $title,
 						'duration' =>  $duration,
 					));
+					// récupération de l'id
+					$music_id = 'SELECT * FROM song WHERE title = "'.$title.'"';
+
+					$read_music_id = $pdo->query($music_id);
+
+					$get_music_id = $read_music_id->fetchAll(PDO::FETCH_OBJ);
+					foreach ($get_music_id as $gmi) {
+						$id_song = $gmi->id;
+					}
 				}
+				//ENVOI DE L'ARTISTE
 				if ( !empty($_POST['artist']) ) {
 					
 
@@ -40,7 +50,28 @@ Class Ajax {
 						'first_name' => $artist,
 						'age' =>  00,
 					));
+					// récupération de l'id
+					$artist_id = 'SELECT * FROM artist WHERE first_name = "'.$artist.'"';
+
+					$read_artist_id = $pdo->query($artist_id);
+
+					$get_artist_id = $read_artist_id->fetchAll(PDO::FETCH_OBJ);
+					foreach ($get_artist_id as $gai) {
+						$id_artist = $gai->id;
+					}
 				}
+				//LIENS ENTRE MUSIQUES ET ARTISTES
+				if ( !empty($_POST['artist']) && !empty($_POST['title'])) {
+
+					$songHasArtist_send= $pdo->prepare('INSERT INTO `song_artist` ( `song_id`, `artist_id`) VALUES ( :song_id, :artist_id)' );
+
+					$songHasArtist_send->execute(array(
+						'song_id' => $id_song,
+						'artist_id' =>  $id_artist,
+					));
+
+				}
+
 	} 		
 }
  
