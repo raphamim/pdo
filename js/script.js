@@ -1,8 +1,9 @@
 function appendDatas(element){
 $('table').append('<tr class="'+element.id+'"><td>'+element.id+'</td><td id="title'+element.id+'">'+element.title+'</td><td>'+(element.duration.substring(3,8))+'</td><td>'+element.first_name+'</td><td><a href="#"><img id="'+element.id+'" class ="upd" src="img/modify.png"></a></td><td><img id="'+element.id+'" class="del" src="img/delete.png"></td></tr>');
-$('#artist-upd').append('<option value="'+element.first_name+'">'+element.first_name+'</option>');
+
 }
 
+//recuperer tout les données pour afficher dans le tableau
 function getDatas() {
 	$.ajax({
 		url: "ajax/ajax.php",
@@ -21,6 +22,26 @@ function getDatas() {
 		console.log(error);
 	});
 }
+
+//fonction pour récuperer la liste d'artistes
+function getDatasLines() {
+	$.ajax({
+		url: "ajax/list.php",
+		data: {
+			function: 'getDatasLines',
+		},
+		dataType: 'json'
+	}).done(function(data){
+		$.each(data, function(index, element){
+			$('#artist-upd').append('<option value="'+element.first_name+'">'+element.first_name+'</option>');
+			
+		});
+		
+	}).fail(function(error){
+		console.log('fail');
+	});
+}
+
 //fonction pour envoyer des données
 function sendDatas() {
 	$.ajax({
@@ -58,7 +79,7 @@ function updateDatas() {
 	}).done(function(data){
 
 		 console.log(data);
-		// refreshDatas("updateLines");
+		 refreshDatas("updateLines");
 	}).fail(function(error){
 		console.log('erreur de modification');
 		
@@ -138,8 +159,9 @@ $(document).ready(function() {
 
 	//CLIQUE SUR LE BOUTON MODIF	
 	 $(".upd").on("click", function(){
+	 	getDatasLines();
 	 	var idUpd = $(this).attr('id');
-	 	$('body').append('<p id="temp">'+idUpd+'</p>');
+	 	
 
 	 	// console.log($('#title'+idUpd).html());
 	 	//PLACEHOLDER DU TITRE SUR LEQUEL ON A CLIQUE
@@ -147,19 +169,28 @@ $(document).ready(function() {
 
 	 	$('#form-upd').show();
 
+	 	
+
 	 	//ENVOIE DE L'UPDATE
 		$("#send-upd").on("click", function(){
-			updateDatas();
+			$('body').append('<p id="temp">'+idUpd+'</p>');
+			
+				updateDatas();
 			$('#temp').remove();	
 		});
-
+		// ON VIDE idUpd POUR EVITER LES DOUBLONS
+		 $(".upd").on("click", function(){
+		 		idUpd = null;
+			 });
+		//FERMER LA DIV MODIF 
+		$("#hide-upd").on("click", function(){
+			idUpd = null;
+			$('#form-upd').hide();	
+		});	
 			
 	 });
 
-	//FERMER LA DIV MODIF 
-	$("#hide-upd").on("click", function(){
-		$('#form-upd').hide();	
-	});	 
+	 
 });
 
 

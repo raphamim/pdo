@@ -17,9 +17,9 @@ Class Ajax {
 			 	 // echo json_encode($_POST['duration']);
 			 	 // echo json_encode($_POST['seconde']);
 			 	 // echo json_encode($_POST['artist']);
-				$title = $_POST['title'];
-				$duration = '00:0'.$_POST['minute'].':'.$_POST['seconde'];
-				$artist = $_POST['artist'];
+				$title = htmlspecialchars($_POST['title']);
+				$duration = '00:0'.htmlspecialchars($_POST['minute']).':'.htmlspecialchars($_POST['seconde']);
+				$artist = htmlspecialchars($_POST['artist']);
 				//ENVOI DE LA MUSIQUE
 				if ( !empty($_POST['title']) ) {
 					
