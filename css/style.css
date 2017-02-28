@@ -55,12 +55,53 @@ th p {
     background-color: #8adb8b;
     border-color: #4ece50;
     display: none;
+    box-shadow: 1px 1px 5px;
+}
+
+.done {
+
+position: fixed;
+text-align: center;
+background-color: #5ec969;
+opacity: 0.88;
+padding: 1%;
+border: solid 1px;
+}
+
+#form-upd input, #form-upd select {
+    display: block;
+    margin-bottom: 5%;
+    text-align: center;
+    margin-left: 25%;
 }
 
 
+#form-upd { 
+    display: none;
+    background-color: #85b3fc;
+    width: 35%;
+    position: fixed;
+    float: left;
+    border: solid 1px #3277e5;
+    padding: 4%;
+    box-shadow: 1px 1px 3px;
+    margin-left: 25%;
+ }
+#quit-upd {
+    margin-left: 100%;
+}
 
+#send-upd img {
+    margin-left: 50%;
+}
 
-
+#form-upd {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 29px;
+    text-transform: uppercase;
+}
 
 
 
